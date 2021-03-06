@@ -1,3 +1,4 @@
+import { Container, CssBaseline, Paper, Toolbar } from '@material-ui/core';
 import React from 'react';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
@@ -5,8 +6,13 @@ import { Header } from './components/Header';
 function App() {
   return (
     <div className="App">
+      <CssBaseline />
       <Header />
-      App
+      <Toolbar />
+      <Container>
+
+        <Paper />
+      </Container>
       <Footer />
     </div>
   );
