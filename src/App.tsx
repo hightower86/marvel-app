@@ -1,20 +1,27 @@
-import { Container, CssBaseline, Paper, Toolbar } from '@material-ui/core';
+import { Container, CssBaseline, Toolbar } from '@material-ui/core';
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
+import { HomePage } from './pages/HomePage';
 
 function App() {
   return (
-    <div className="App">
-      <CssBaseline />
-      <Header />
-      <Toolbar />
-      <Container>
+    <Router>
 
-        <Paper />
-      </Container>
-      <Footer />
-    </div>
+      <div className="App">
+        <CssBaseline />
+        <Header />
+        <Toolbar />
+        <Container style={{ minHeight: '85vh' }}>
+          <Switch>
+            <Route exact path='/' component={HomePage} />
+          </Switch>
+        </Container>
+
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
