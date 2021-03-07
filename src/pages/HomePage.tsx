@@ -7,7 +7,7 @@ interface Props {
 const HomePage = (props: Props) => {
   return (
     <div>
-      Home
+      Home sweet home
     </div>
   )
 }
