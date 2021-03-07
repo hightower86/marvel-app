@@ -22,7 +22,7 @@
   },
   "include": [
     "src"
-  ],
+, "@types/alltypes.d.ts"  ],
   "typeRoots": [
     "../node_modules/@types",
     "../@types"
