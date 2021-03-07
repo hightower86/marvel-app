@@ -16,7 +16,7 @@ const HomePage = (props: Props) => {
           limit: 10,
           apikey: '1bded6638cafa565ae83ba51bc9e1d43'
         }
-        const { data } = await axios('http://gateway.marvel.com/v1/public/comics', { params })
+        const { data } = await axios('https://gateway.marvel.com/v1/public/comics', { params })
         console.log({ data });
         setTodos(data)
       } catch (error) {
