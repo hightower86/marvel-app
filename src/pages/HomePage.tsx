@@ -1,7 +1,10 @@
 
-import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+
+import { Link } from 'react-router-dom'
 import { fetchCharacters } from '../redux-toolkit/actions'
+import { RootState } from '../redux-toolkit/store'
+import CharactersPage from './CharactersPage'
 import { charactersData } from './data'
 
 interface Props {
@@ -9,41 +12,15 @@ interface Props {
 }
 
 const HomePage = (props: Props) => {
-  const dispatch = useDispatch()
 
-  const [characters, setCharacters] = useState(charactersData.data.results)
 
-  useEffect(() => {
-    const request = async () => {
-      await dispatch(fetchCharacters())
-    }
-    request()
-  }, [])
-
-  // useEffect(() => {
-  //   const request = async () => {
-  //     try {
-  //       // const params = {
-  //       //   limit: 10,
-  //       //   apikey: '1bded6638cafa565ae83ba51bc9e1d43'
-  //       // }
-  //       // const { data } = await axios('https://gateway.marvel.com/v1/public/comics', { params })
-
-  //       console.log({ data });
-  //       setCharacters(data)
-  //     } catch (error) {
-  //       console.log({ error });
-  //     }
-
-  //   }
-
-  //   request()
-
-  // }, [])
   return (
     <div>
       Home sweet home
-      <pre>{JSON.stringify(characters, null, 4)}</pre>
+     
+      <Link to='/characters' >
+        Characters
+      </Link>
     </div>
   )
 }
