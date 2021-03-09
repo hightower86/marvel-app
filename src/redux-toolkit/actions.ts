@@ -1,8 +1,11 @@
-import { apiGetCharacters } from './../api/index';
+import { apiGetCharacters, apiGetHero } from './../api/index';
 import {
   getCharactersFail,
   getCharactersFetching,
   getCharactersSuccess,
+  getHeroFail,
+  getHeroFetching,
+  getHeroSuccess,
 } from './comicsSlice';
 
 export const fetchCharacters = () => async (dispatch: any) => {
@@ -14,5 +17,17 @@ export const fetchCharacters = () => async (dispatch: any) => {
     dispatch(getCharactersSuccess(results));
   } catch (error) {
     dispatch(getCharactersFail(error));
+  }
+};
+
+export const fetchHero = (id: number) => async (dispatch: any) => {
+  dispatch(getHeroFetching());
+  try {
+    const {
+      data: { results },
+    } = await apiGetHero(id);
+    dispatch(getHeroSuccess(results));
+  } catch (error) {
+    dispatch(getHeroFail(error));
   }
 };

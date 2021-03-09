@@ -1,10 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import comicsReducer from './comicsSlice';
+import comicsReducer, { IHero } from './comicsSlice';
 // ...
 
 export interface RootState {
   comics: {
     characters: [];
+    hero: IHero;
   };
 }
 const rootReducer = combineReducers({

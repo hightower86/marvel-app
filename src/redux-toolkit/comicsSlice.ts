@@ -2,10 +2,24 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../redux-toolkit/store';
 
 // Define a type for the slice state
+
+export interface IHero {
+  id: number;
+  name: string;
+  image: {
+    path: string;
+    extension: string;
+  };
+  comics: [];
+  stories: [];
+  events: [];
+  series: [];
+}
 interface ComicsState {
   characters: [];
   error: null | string;
   isLoading: boolean;
+  hero: IHero | null;
 }
 
 // Define the initial state using that type
@@ -13,6 +27,7 @@ const initialState: ComicsState = {
   characters: [],
   error: null,
   isLoading: false,
+  hero: null,
 };
 
 export const comicsSlice = createSlice({
@@ -31,6 +46,18 @@ export const comicsSlice = createSlice({
     getCharactersFail: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
+
+    getHeroFetching: (state) => {
+      state.isLoading = true;
+    },
+    getHeroSuccess: (state, action: PayloadAction<IHero>) => {
+      state.hero = action.payload;
+      state.isLoading = false;
+      state.error = null;
+    },
+    getHeroFail: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
   },
 });
 
@@ -38,6 +65,9 @@ export const {
   getCharactersSuccess,
   getCharactersFetching,
   getCharactersFail,
+  getHeroFail,
+  getHeroFetching,
+  getHeroSuccess,
 } = comicsSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
