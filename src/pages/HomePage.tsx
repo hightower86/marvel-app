@@ -1,22 +1,13 @@
 
-import { useEffect } from 'react'
-
 import { Link } from 'react-router-dom'
-import { fetchCharacters } from '../redux-toolkit/actions'
-import { RootState } from '../redux-toolkit/store'
-import CharactersPage from './CharactersPage'
-import { charactersData } from './data'
 
-interface Props {
 
-}
-
-const HomePage = (props: Props) => {
+const HomePage = () => {
 
 
   return (
     <div>
-      Home sweet home
+      Comics characters
      
       <Link to='/characters' >
         Characters

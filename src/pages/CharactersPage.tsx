@@ -1,9 +1,5 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchCharacters } from '../redux-toolkit/actions'
-import { RootState } from '../redux-toolkit/store'
-import { charactersData } from './data'
-
+import React from 'react'
+// import { useDispatch } from 'react-redux'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -13,6 +9,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { Paper } from '@material-ui/core'
+
+import { charactersData } from './data'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 const CharactersPage: React.FC = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   //const { characters } = useSelector((state: RootState) => state.comics)
   const characters = charactersData.data.results
   const classes = useStyles();
@@ -51,9 +49,9 @@ const CharactersPage: React.FC = () => {
       <List className={classes.root}>
         {characters.map(({ id, name, description, thumbnail: { path, extension } }) => {
           return (
-            <Paper elevation={1}>
+            <Paper key={id} elevation={1}>
 
-              <ListItem key={id} alignItems="flex-start" className={classes.item}>
+              <ListItem alignItems="flex-start" className={classes.item}>
                 <ListItemAvatar>
                   <Avatar alt="Remy Sharp" src={`${path}.${extension}`} />
                 </ListItemAvatar>
