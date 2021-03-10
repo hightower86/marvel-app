@@ -32,8 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
-
 const CharactersPage: React.FC = () => {
   const dispatch = useDispatch()
   const { characters } = useSelector((state: RootState) => state.comics.characters)
@@ -44,8 +42,7 @@ const CharactersPage: React.FC = () => {
     const request = async () => {
       await dispatch(fetchCharacters())
     }
-    if (characters.length < 1) {
-
+    if (!characters?.length) {
       request()
     }
   }, [])
@@ -54,7 +51,7 @@ const CharactersPage: React.FC = () => {
     <div>
       <List className={classes.root}>
         <Grid container spacing={3} >
-          {characters.map(({ id, name, description, thumbnail: { path, extension } }: any) => {
+          {characters?.map(({ id, name, description, thumbnail: { path, extension } }: any) => {
             return (
               <Grid key={id} item xs={12} sm={6} md={4} >
                 <Paper elevation={1} style={{ minHeight: '100%' }}>

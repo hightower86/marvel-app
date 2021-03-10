@@ -14,6 +14,7 @@ export const fetchCharacters = () => async (dispatch: any) => {
     const {
       data: { results },
     } = await apiGetCharacters();
+    console.log({ results });
     dispatch(getCharactersSuccess(results));
   } catch (error) {
     dispatch(getCharactersFail(error));
