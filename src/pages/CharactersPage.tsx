@@ -42,7 +42,7 @@ const CharactersPage: React.FC = () => {
     const request = async () => {
       await dispatch(fetchCharacters())
     }
-    if (!characters.length) {
+    if (!characters?.length) {
       request()
     }
   }, [])
