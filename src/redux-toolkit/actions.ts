@@ -11,11 +11,10 @@ import {
 export const fetchCharacters = () => async (dispatch: any) => {
   dispatch(getCharactersFetching());
   try {
-    const {
-      data: { results },
-    } = await apiGetCharacters();
-    console.log({ results });
-    dispatch(getCharactersSuccess(results));
+    const { data } = await apiGetCharacters();
+    console.log('data', data);
+    console.log('data.results', data.results);
+    dispatch(getCharactersSuccess(data.results));
   } catch (error) {
     dispatch(getCharactersFail(error));
   }
