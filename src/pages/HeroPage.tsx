@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
+// import { RouteComponentProps } from 'react-router'
 import { fetchHero } from '../redux-toolkit/actions'
 import { RootState } from '../redux-toolkit/store'
 
