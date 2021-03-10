@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CharactersPage: React.FC = () => {
   const dispatch = useDispatch()
-  const { characters } = useSelector((state: RootState) => state.comics.characters)
+  const { characters } = useSelector((state: RootState) => state.comics)
   //const characters = charactersData.data.results
   const classes = useStyles();
 
