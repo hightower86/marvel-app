@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router'
 import { fetchHero } from '../redux-toolkit/actions'
 import { RootState } from '../redux-toolkit/store'
 
-const HeroPage: React.FC<RouteComponentProps> = ({ match }: any) => {
+const HeroPage: React.FC = ({ match }: any) => {
   const dispatch = useDispatch()
   const heroData = useSelector((state: RootState) => state.comics.hero)
 
