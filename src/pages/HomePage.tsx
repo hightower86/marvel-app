@@ -2,8 +2,8 @@
 import { Link } from 'react-router-dom'
 
 
-const HomePage = () => {
-
+const HomePage = (props:any) => {
+console.log(props);
 
   return (
     <div>

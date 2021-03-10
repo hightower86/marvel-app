@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RouteComponentProps } from 'react-router'
+import { fetchHero } from '../redux-toolkit/actions'
+import { RootState } from '../redux-toolkit/store'
 
-interface Props {
+const HeroPage: React.FC<RouteComponentProps> = ({ match }: any) => {
+  const dispatch = useDispatch()
+  const heroData = useSelector((state: RootState) => state.comics.hero)
 
-}
+  useEffect(() => {
+    const request = async () => {
+      await dispatch(fetchHero(match.params.id))
+    }
+    request()
+  }, [])
 
-const HeroPage = (props: Props) => {
   return (
     <div>
-      HeroPage
+      <div>HeroPage with id {match.params.id}</div>
+      Hero data:
+      <pre>{JSON.stringify(heroData, null, 4)}</pre>
     </div>
   )
 }

@@ -14,6 +14,7 @@ import { charactersData } from './data'
 import { Link } from 'react-router-dom';
 import { RootState } from '../redux-toolkit/store';
 import { fetchCharacters } from '../redux-toolkit/actions';
+import { RouteComponentProps } from 'react-router';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,9 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 
-const CharactersPage: React.FC = () => {
+const CharactersPage: React.FC<RouteComponentProps> = ({ history, location }) => {
   const dispatch = useDispatch()
-  const { characters } = useSelector((state: RootState) => state.comics)
+  const { characters } = useSelector((state: RootState) => state.comics.characters)
   //const characters = charactersData.data.results
   const classes = useStyles();
 
