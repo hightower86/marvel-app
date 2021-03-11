@@ -6,7 +6,8 @@ import { RootState } from '../redux-toolkit/store';
 export interface IHero {
   id: number;
   name: string;
-  image: {
+  description: string;
+  thumbnail: {
     path: string;
     extension: string;
   };
@@ -27,7 +28,19 @@ const initialState: ComicsState = {
   characters: [],
   error: null,
   isLoading: false,
-  hero: null,
+  hero: {
+    id: 0,
+    name: '',
+    description: '',
+    thumbnail: {
+      path: '',
+      extension: '',
+    },
+    comics: [],
+    stories: [],
+    events: [],
+    series: [],
+  },
 };
 
 export const comicsSlice = createSlice({

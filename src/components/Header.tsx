@@ -40,6 +40,12 @@ function Header() {
             </Link>
 
           </Typography>
+          <Typography variant="h6" className={classes.title}>
+            <Link to='/characters' className={classes.link}>
+              Characters
+            </Link>
+
+          </Typography>
           <Button color="inherit">
             <a className={classes.link} href='https://github.com/hightower86/marvel-app' target='blank' rel='noopener noreferrer'>
               Code

@@ -10,7 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { Grid, Paper } from '@material-ui/core'
 
-import { charactersData } from './data'
+import { charactersData } from '../api/data'
 import { Link } from 'react-router-dom';
 import { RootState } from '../redux-toolkit/store';
 import { fetchCharacters } from '../redux-toolkit/actions';
@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme: Theme) =>
     item: {
       // border: '1px solid #dcdcdc',
       //marginBottom: 10
+    },
+    link: {
+      textDecoration: 'none'
     }
   }),
 );
@@ -55,7 +58,7 @@ const CharactersPage: React.FC = () => {
             return (
               <Grid key={id} item xs={12} sm={6} md={4} >
                 <Paper elevation={1} style={{ minHeight: '100%' }}>
-                  <Link to={`/characters/${id}`}>
+                  <Link to={`/characters/${id}`} className={classes.link}>
 
                     <ListItem alignItems="flex-start" className={classes.item}>
                       <ListItemAvatar>

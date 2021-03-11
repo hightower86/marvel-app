@@ -11,7 +11,8 @@ import {
 export const fetchCharacters = () => async (dispatch: any) => {
   dispatch(getCharactersFetching());
   try {
-    const { data } = await apiGetCharacters();
+    const response: any = await apiGetCharacters();
+    const data = response.data;
     console.log('data', data);
     console.log('data.results', data.results);
     dispatch(getCharactersSuccess(data.results));
@@ -23,10 +24,11 @@ export const fetchCharacters = () => async (dispatch: any) => {
 export const fetchHero = (id: number) => async (dispatch: any) => {
   dispatch(getHeroFetching());
   try {
-    const {
-      data: { results },
-    } = await apiGetHero(id);
-    dispatch(getHeroSuccess(results));
+    const result: any = await apiGetHero(id);
+    const data = result.data;
+    console.log('data', data);
+    console.log('data.results', data.results);
+    dispatch(getHeroSuccess(data?.results?.[0]));
   } catch (error) {
     dispatch(getHeroFail(error));
   }
