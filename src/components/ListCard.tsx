@@ -8,6 +8,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import { Paper, Typography } from '@material-ui/core';
 import { RootState } from '../redux-toolkit/store'
 import { Skeleton } from '@material-ui/lab';
+import { randomBytes } from 'crypto'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,7 +71,7 @@ export default function PinnedSubheaderList({ title, list }: any) {
           <ul className={classes.ul}>
             {isLoading && renderSkeleton}
             {list?.map(({ name, resourceURI }: any) => (
-              <li key={`item-${resourceURI}-${name}`} className={classes.listSection}>
+              <li key={randomBytes(4).toString('hex')} className={classes.listSection}>
                 <ListItem className={classes.listItem}>
                   <ListItemText primary={name} />
                   <ListItemText secondary={resourceURI} />

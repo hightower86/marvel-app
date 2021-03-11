@@ -7,22 +7,7 @@ import BGmob from '../images/home-background.jpg'
 const useStyles = makeStyles((theme) => ({
 
   container: {
-    // position: 'relative',
-    // width: '100%',
-    // minHeight: '100%',
-    // overflow: 'auto',
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'space-between',
-    // backgroundImage: `url(${BG})`,
-    // //background: BG,
-    // backgroundSize: 'cover',
-    // backgroundRepeat: 'repeat-y',
-    // backgroundPosition: 'top center',
-    // [theme.breakpoints.down('sm')]: {
-    //   backgroundImage: `url(${BGmob})`,
-    // },
+
   },
 
 }));
