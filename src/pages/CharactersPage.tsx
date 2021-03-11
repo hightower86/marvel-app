@@ -14,19 +14,25 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../redux-toolkit/store';
 import { fetchCharacters } from '../redux-toolkit/actions';
 import { Skeleton } from '@material-ui/lab';
+import BG from '../images/home-background.jpg'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: '100%',
-      maxWidth: '100%',
-      backgroundColor: theme.palette.background.paper,
+      height: '88vh',
+      //maxWidth: '100%',
+      background: BG,
+      //backgroundColor: theme.palette.background.paper,
+    },
+    listRoot: {
+
     },
     inline: {
       display: 'inline',
     },
     link: {
-      textDecoration: 'none'
+      textDecoration: 'none',
+      color: '#dadada'
     },
     item: {}
   }),
@@ -60,8 +66,8 @@ const CharactersPage: React.FC = () => {
     </Grid>
 
   return (
-    <div>
-      <List className={classes.root}>
+    <div className={classes.root}>
+      <List className={classes.listRoot}>
         <Grid container spacing={3} >
           {isLoading && renderSkeleton}
           {characters?.map(({ id, name, description, thumbnail: { path, extension } }: any) => {
@@ -76,13 +82,14 @@ const CharactersPage: React.FC = () => {
                       </ListItemAvatar>
                       <ListItemText
                         primary={name}
+                        color="primary"
                         secondary={
                           <React.Fragment>
                             <Typography
                               component="span"
                               variant="body2"
                               className={classes.inline}
-                              color="textPrimary"
+                            //color="textPrimary"
                             >
                               {description}
                             </Typography>
@@ -101,7 +108,7 @@ const CharactersPage: React.FC = () => {
           <Divider variant="inset" component="li" />
         </Grid>
       </List>
-      <pre>{JSON.stringify(characters, null, 4)}</pre>
+      {/* <pre>{JSON.stringify(characters, null, 4)}</pre> */}
 
     </div>
   )

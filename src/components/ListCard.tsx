@@ -5,16 +5,18 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import { Paper } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 import { RootState } from '../redux-toolkit/store'
 import { Skeleton } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    paper: {
+
+    },
     root: {
       width: '100%',
       maxWidth: '100%',
-      backgroundColor: theme.palette.background.paper,
       position: 'relative',
       overflow: 'auto',
       maxHeight: 500,
@@ -30,7 +32,15 @@ const useStyles = makeStyles((theme: Theme) =>
     listItem: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'left'
+      alignItems: 'left',
+      color: 'white'
+    },
+    header: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 10,
+      textTransform: 'uppercase'
     }
   }),
 );
@@ -50,10 +60,14 @@ export default function PinnedSubheaderList({ title, list }: any) {
 
   return (
     <>
-      <Paper elevation={1}>
+      <Paper elevation={1} className={classes.paper}>
+        <Paper className={classes.header}>
+          <Typography variant='h5' >
+            {title}
+          </Typography>
+        </Paper>
         <List component="nav" className={classes.root} subheader={<li />}>
           <ul className={classes.ul}>
-            <ListSubheader>{title}</ListSubheader>
             {isLoading && renderSkeleton}
             {list?.map(({ name, resourceURI }: any) => (
               <li key={`item-${resourceURI}-${name}`} className={classes.listSection}>

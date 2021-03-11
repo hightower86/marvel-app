@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core'
+import { Grid, makeStyles } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import HeroCard from '../components/HeroCard'
@@ -6,8 +6,17 @@ import ListCard from '../components/ListCard'
 // import { RouteComponentProps } from 'react-router'
 import { fetchHero } from '../redux-toolkit/actions'
 import { RootState } from '../redux-toolkit/store'
+import BG from '../images/home-background.webp'
+
+const useStyles = makeStyles({
+  root: {
+    height: '88vh',
+    background: BG,
+  }
+})
 
 const HeroPage: React.FC = ({ match }: any) => {
+  const classes = useStyles()
   const dispatch = useDispatch()
   const heroData = useSelector((state: RootState) => state.comics.hero)
   const { name, description, thumbnail: { path, extension }, comics, series, stories, events } = heroData
@@ -23,24 +32,27 @@ const HeroPage: React.FC = ({ match }: any) => {
   }, [])
 
   return (
-    <Grid container spacing={3} style={{ marginTop: 20 }}>
-      <Grid item xs={12} sm={6} lg={4}>
-        <HeroCard {...heroCardProps} />
+    <div className={classes.root}>
+
+      <Grid container spacing={3} style={{ marginTop: 20 }}>
+        <Grid item xs={12} sm={6} lg={4}>
+          <HeroCard {...heroCardProps} />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4}>
+          <ListCard title='comics' list={comics.items} />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4}>
+          <ListCard title='series' list={series.items} />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4}>
+          <ListCard title='stories' list={stories.items} />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4}>
+          <ListCard title='events' list={events.items} />
+        </Grid>
+        {/* <pre>{JSON.stringify(heroData, null, 4)}</pre> */}
       </Grid>
-      <Grid item xs={12} sm={6} lg={4}>
-        <ListCard title='comics' list={comics.items} />
-      </Grid>
-      <Grid item xs={12} sm={6} lg={4}>
-        <ListCard title='series' list={series.items} />
-      </Grid>
-      <Grid item xs={12} sm={6} lg={4}>
-        <ListCard title='stories' list={stories.items} />
-      </Grid>
-      <Grid item xs={12} sm={6} lg={4}>
-        <ListCard title='events' list={events.items} />
-      </Grid>
-      {/* <pre>{JSON.stringify(heroData, null, 4)}</pre> */}
-    </Grid>
+    </div>
   )
 }
 
