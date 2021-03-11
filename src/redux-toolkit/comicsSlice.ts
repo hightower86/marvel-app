@@ -56,6 +56,11 @@ export const comicsSlice = createSlice({
       state.isLoading = false;
       state.error = null;
     },
+    getMoreCharactersSuccess: (state, action: PayloadAction<[]>) => {
+      state.characters = [...state.characters, ...action.payload];
+      state.isLoading = false;
+      state.error = null;
+    },
     getCharactersFail: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
@@ -81,6 +86,7 @@ export const {
   getHeroFail,
   getHeroFetching,
   getHeroSuccess,
+  getMoreCharactersSuccess,
 } = comicsSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

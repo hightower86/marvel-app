@@ -5,9 +5,9 @@ import { heroData } from './heroData';
 const BASE_URL = 'https://gateway.marvel.com/v1/public/characters';
 const API_KEY = '1bded6638cafa565ae83ba51bc9e1d43';
 
-export const apiGetCharacters = () => {
+export const apiGetCharacters = (limit: number, offset: number) => {
   const params = {
-    //limit: 10,
+    limit: limit,
     apikey: API_KEY,
   };
   return axios(BASE_URL, { params }).then((res) => res.data);

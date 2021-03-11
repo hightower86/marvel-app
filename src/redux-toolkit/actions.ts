@@ -6,16 +6,23 @@ import {
   getHeroFail,
   getHeroFetching,
   getHeroSuccess,
+  getMoreCharactersSuccess,
 } from './comicsSlice';
 
-export const fetchCharacters = () => async (dispatch: any) => {
+export const fetchCharacters = (limit: number, offset: number) => async (
+  dispatch: any
+) => {
   dispatch(getCharactersFetching());
   try {
-    const response: any = await apiGetCharacters();
+    const response: any = await apiGetCharacters(limit, offset);
     const data = response.data;
-    console.log('data', data);
-    console.log('data.results', data.results);
-    dispatch(getCharactersSuccess(data.results));
+    // console.log('data', data);
+    // console.log('data.results', data.results);
+    if (offset > 0) {
+      dispatch(getMoreCharactersSuccess(data.results));
+    } else {
+      dispatch(getCharactersSuccess(data.results));
+    }
   } catch (error) {
     dispatch(getCharactersFail(error));
   }

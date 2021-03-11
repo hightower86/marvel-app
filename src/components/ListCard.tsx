@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const renderSkeleton =
   [1, 2, 3, 4, 5, 6, 7, 8].map(elem => (
 
-    <Skeleton key={elem} height={100} />
+    <Skeleton key={elem} height={100} width={400} />
   ))
 
 
