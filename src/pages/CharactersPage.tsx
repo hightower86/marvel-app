@@ -10,10 +10,10 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { Grid, Paper } from '@material-ui/core'
 
-import { charactersData } from '../api/data'
 import { Link } from 'react-router-dom';
 import { RootState } from '../redux-toolkit/store';
 import { fetchCharacters } from '../redux-toolkit/actions';
+import { Skeleton } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,20 +25,19 @@ const useStyles = makeStyles((theme: Theme) =>
     inline: {
       display: 'inline',
     },
-    item: {
-      // border: '1px solid #dcdcdc',
-      //marginBottom: 10
-    },
     link: {
       textDecoration: 'none'
-    }
+    },
+    item: {}
   }),
 );
 
+
+
+
 const CharactersPage: React.FC = () => {
   const dispatch = useDispatch()
-  const { characters } = useSelector((state: RootState) => state.comics)
-  //const characters = charactersData.data.results
+  const { characters, isLoading } = useSelector((state: RootState) => state.comics)
   const classes = useStyles();
 
   useEffect(() => {
@@ -50,10 +49,27 @@ const CharactersPage: React.FC = () => {
     }
   }, [])
 
+  const renderSkeleton =
+    // () => {
+    //const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+
+    // return (
+    <Grid container spacing={3} >
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(() => (
+        <Grid item xs={12} sm={6} md={4}>
+
+          <Skeleton height={150} />
+        </Grid>
+      ))}
+    </Grid>
+
+  // )
+  // }
   return (
     <div>
       <List className={classes.root}>
         <Grid container spacing={3} >
+          {isLoading && renderSkeleton}
           {characters?.map(({ id, name, description, thumbnail: { path, extension } }: any) => {
             return (
               <Grid key={id} item xs={12} sm={6} md={4} >
