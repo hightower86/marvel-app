@@ -50,10 +50,6 @@ const CharactersPage: React.FC = () => {
   }, [])
 
   const renderSkeleton =
-    // () => {
-    //const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-
-    // return (
     <Grid container spacing={3} >
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(() => (
         <Grid item xs={12} sm={6} md={4}>
@@ -63,8 +59,6 @@ const CharactersPage: React.FC = () => {
       ))}
     </Grid>
 
-  // )
-  // }
   return (
     <div>
       <List className={classes.root}>

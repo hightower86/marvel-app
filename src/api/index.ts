@@ -10,22 +10,22 @@ export const apiGetCharacters = () => {
     //limit: 10,
     apikey: API_KEY,
   };
-  //return axios(BASE_URL, { params }).then((res) => res.data);
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(charactersData);
-    }, 2000);
-  });
+  return axios(BASE_URL, { params }).then((res) => res.data);
+  // return new Promise((resolve) => {
+  //   setTimeout(() => {
+  //     resolve(charactersData);
+  //   }, 2000);
+  // });
 };
 export const apiGetHero = (id: number) => {
   const params = {
     //limit: 10,
     apikey: API_KEY,
   };
-  //return axios(`${BASE_URL}/${id}`, { params }).then((res) => res.data);
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(heroData);
-    }, 2000);
-  });
+  return axios(`${BASE_URL}/${id}`, { params }).then((res) => res.data);
+  // return new Promise((resolve) => {
+  //   setTimeout(() => {
+  //     resolve(heroData);
+  //   }, 2000);
+  // });
 };
