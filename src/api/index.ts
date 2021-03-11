@@ -7,6 +7,7 @@ const API_KEY = '1bded6638cafa565ae83ba51bc9e1d43';
 
 export const apiGetCharacters = (limit: number, offset: number) => {
   const params = {
+    offset: offset,
     limit: limit,
     apikey: API_KEY,
   };

@@ -16,8 +16,6 @@ export const fetchCharacters = (limit: number, offset: number) => async (
   try {
     const response: any = await apiGetCharacters(limit, offset);
     const data = response.data;
-    // console.log('data', data);
-    // console.log('data.results', data.results);
     if (offset > 0) {
       dispatch(getMoreCharactersSuccess(data.results));
     } else {
@@ -33,8 +31,6 @@ export const fetchHero = (id: number) => async (dispatch: any) => {
   try {
     const result: any = await apiGetHero(id);
     const data = result.data;
-    console.log('data', data);
-    console.log('data.results', data.results);
     dispatch(getHeroSuccess(data?.results?.[0]));
   } catch (error) {
     dispatch(getHeroFail(error));
