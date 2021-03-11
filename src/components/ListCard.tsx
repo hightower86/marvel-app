@@ -71,13 +71,13 @@ export default function PinnedSubheaderList({ title, list }: any) {
           <ul className={classes.ul}>
             {isLoading && renderSkeleton}
             {list?.map(({ name, resourceURI }: any) => (
-              <li key={randomBytes(4).toString('hex')} className={classes.listSection}>
+              <div key={randomBytes(4).toString('hex')} className={classes.listSection}>
                 <ListItem className={classes.listItem}>
                   <ListItemText primary={name} />
                   <ListItemText secondary={resourceURI} />
                 </ListItem>
                 <hr />
-              </li>
+              </div>
             ))}
           </ul>
         </List>

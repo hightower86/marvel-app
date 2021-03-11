@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import { createStyles, Theme, makeStyles, fade } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
@@ -8,12 +8,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import { Box, Button, Grid, Paper } from '@material-ui/core'
+import { Box, Button, Grid, InputBase, Paper } from '@material-ui/core'
 
 import { Link } from 'react-router-dom';
-import { RootState } from '../redux-toolkit/store';
+import { RootState, store } from '../redux-toolkit/store';
 import { fetchCharacters } from '../redux-toolkit/actions';
 import { Skeleton } from '@material-ui/lab';
+import SearchIcon from '@material-ui/icons/Search';
 import BG from '../images/home-background.jpg'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -33,7 +34,45 @@ const useStyles = makeStyles((theme: Theme) =>
       textDecoration: 'none',
       color: '#dadada'
     },
-    item: {}
+    item: {},
+    search: {
+      position: 'relative',
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+      '&:hover': {
+        backgroundColor: fade(theme.palette.common.white, 0.80),
+      },
+      marginRight: theme.spacing(2),
+      marginLeft: 0,
+      width: 200,//'100%',
+      [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(3),
+        width: 200,//'auto',
+      },
+    },
+    searchIcon: {
+      color: 'black',
+      padding: theme.spacing(0, 2),
+      height: '100%',
+      position: 'absolute',
+      pointerEvents: 'none',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    inputRoot: {
+      color: 'black',
+    },
+    inputInput: {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: '20ch',
+      },
+    },
   }),
 );
 
@@ -43,6 +82,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const CharactersPage: React.FC = () => {
   const dispatch = useDispatch()
   const { characters, isLoading } = useSelector((state: RootState) => state.comics)
+  const [filteredCharacters, setFilteredCharacters] = useState(characters)
   const classes = useStyles();
   const limit = 20
   const offset = characters?.length
@@ -50,6 +90,8 @@ const CharactersPage: React.FC = () => {
   useEffect(() => {
     const request = async () => {
       await dispatch(fetchCharacters(limit, offset))
+      setFilteredCharacters(store.getState().comics.characters)
+
     }
     if (!characters?.length) {
       request()
@@ -60,6 +102,7 @@ const CharactersPage: React.FC = () => {
     () => {
       const request = async () => {
         await dispatch(fetchCharacters(limit, offset))
+        setFilteredCharacters(store.getState().comics.characters)
       }
       request()
     },
@@ -76,12 +119,34 @@ const CharactersPage: React.FC = () => {
       ))}
     </Grid>
 
+  const handleInputChange = (e: any) => {
+    const value = e.target.value;
+    const filtered = characters.filter((elem: any) => elem.name.toLowerCase().includes(value.toLowerCase()))
+    setFilteredCharacters(filtered)
+  }
+
   return (
     <div className={classes.root}>
+      <Box display='flex' justifyContent='center' padding={2}>
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ 'aria-label': 'search' }}
+            onChange={handleInputChange}
+          />
+        </div>
+      </Box>
       <List className={classes.listRoot}>
         <Grid container spacing={3} >
           {isLoading && renderSkeleton}
-          {characters?.map(({ id, name, description, thumbnail: { path, extension } }: any) => {
+          {filteredCharacters?.map(({ id, name, description, thumbnail: { path, extension } }: any) => {
             return (
               <Grid key={id} item xs={12} sm={6} md={4} >
                 <Paper elevation={1} style={{ minHeight: '100%' }}>
